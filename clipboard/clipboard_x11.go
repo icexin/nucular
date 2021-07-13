@@ -1,13 +1,14 @@
-// +build linux,!android freebsd
+// +build !linux,!android freebsd
 
 package clipboard
 
 import (
 	"fmt"
-	"github.com/BurntSushi/xgb"
-	"github.com/BurntSushi/xgb/xproto"
 	"os"
 	"time"
+
+	"github.com/BurntSushi/xgb"
+	"github.com/BurntSushi/xgb/xproto"
 )
 
 const debugClipboardRequests = false

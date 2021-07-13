@@ -22,7 +22,6 @@ import (
 	"github.com/aarzilli/nucular/label"
 	"github.com/aarzilli/nucular/rect"
 
-	"golang.org/x/exp/shiny/driver"
 	"golang.org/x/exp/shiny/screen"
 	"golang.org/x/mobile/event/key"
 	"golang.org/x/mobile/event/lifecycle"
@@ -39,6 +38,8 @@ import (
 )
 
 //go:generate go-bindata -o internal/assets/assets.go -pkg assets DroidSansMono.ttf
+
+var DriverMain func(func(screen.Screen))
 
 var clipboardStarted bool = false
 var clipboardMu sync.Mutex
@@ -89,7 +90,7 @@ func NewMasterWindowSize(flags WindowFlags, title string, sz image.Point, update
 
 // Shows window, runs event loop
 func (mw *masterWindow) Main() {
-	driver.Main(mw.main)
+	DriverMain(mw.main)
 	if mw.onClose != nil {
 		mw.onClose()
 	}
